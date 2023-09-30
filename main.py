@@ -57,7 +57,7 @@ def shearchs(driver):
     driver.get("C:\\Users\\thoma\\Desktop\\MS-Reward-Farmer\\recherches.html")
     
     
-    time.sleep(20)
+    time.sleep(120)
 
     driver.quit()
 
