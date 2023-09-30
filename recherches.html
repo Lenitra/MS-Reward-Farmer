@@ -1,0 +1,95 @@
+<html>
+	<head>
+		<title>Microsoft Rewards Bot</title>
+	</head>
+	<body>
+		<p>Status: <strong id="status">Currently running...</strong></p>
+		<p>Auto reload page: <strong id="reloadstatus"></strong></p><button id="reload">Toggle</button>
+		<p>Current search per load: <strong id="searches"></strong></p><button id="change">Change</button> <button id="reset">Reset</button>
+		<button id="dm"><span id="dms"></span> Debug Mode</button>
+		<script>
+			window.onload = function(){
+				function checkBoolean(v){
+					return ""+v.toLowerCase()==='true';
+				}
+				if(!localStorage.getItem("searches"))localStorage.setItem("searches", 10);
+				if(!localStorage.getItem("autoreload"))localStorage.setItem("autoreload", true);
+				if(!localStorage.getItem("debug"))localStorage.setItem("debug", false);
+				window.setInterval(function(){
+					document.querySelector("#searches").innerText = "" + localStorage.getItem("searches");
+					document.querySelector("#reloadstatus").innerText = "" + localStorage.getItem("autoreload");
+					if(checkBoolean(localStorage.getItem("debug"))){
+						document.querySelector("#dms").innerText = "Disable";
+					}else{
+						document.querySelector("#dms").innerText = "Enable";
+					}
+				});
+				document.querySelector("#reload").onclick = function(){
+					localStorage.setItem("autoreload", !checkBoolean(localStorage.getItem("autoreload")));
+				}
+				document.querySelector("#dm").onclick = function(){
+					localStorage.setItem("debug", !checkBoolean(localStorage.getItem("debug")));
+					let dbg = new URL(location.href);
+					dbg.searchParams.set("debug", localStorage.getItem("debug"));
+					location.href = dbg;
+				}
+				document.querySelector("#change").onclick = function(){
+					let w = prompt();
+					if(w<=0||w>100){
+						alert("Number must between 1 and 100.")
+					}else{
+						localStorage.setItem("searches", Number(w));
+					}
+				}
+				document.querySelector("#reset").onclick = function(){
+					localStorage.setItem("searches", 1);
+				}
+				let frameReady = 0;
+				function chargen(length) {
+					var result           = '';
+					var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+					var charactersLength = characters.length;
+					for ( var i = 0; i < length; i++ ) {
+						result += characters.charAt(Math.floor(Math.random() * charactersLength));
+					}
+					return result;
+				}
+				function createIframe(search){
+					let chars = chargen(10);
+					let a = document.createElement("iframe");
+					let bingurl = new URL("https://www.bing.com/news/search?q=" + Math.random() + chars);
+					bingurl.searchParams.set("setmkt", "en-us");
+					bingurl.searchParams.set("setlang", "en");
+					a.src = bingurl.href;
+					a.id = chars;
+					document.body.appendChild(a);
+					if(!(((new URL(location.href).searchParams.get("debug")+"")).toLowerCase()==='true')){
+						a.style.display = "none";
+						a.onload = function(){
+							window.setTimeout(function(){
+								a.remove();
+							}, 1000);
+						}
+						frameReady += 1;
+					}
+				}
+				for(let i=0;i<Number(localStorage.getItem("searches"));i++){
+					createIframe();
+				}
+				let isDone = window.setInterval(function(){
+					if(frameReady>=(Number(localStorage.getItem("searches"))-1)){
+						window.clearInterval(isDone);
+						if(checkBoolean(localStorage.getItem("autoreload"))){
+							document.querySelector("#status").innerText = "Done! Reloading in 1 seconds...";
+							window.setTimeout(function(){
+								location.reload();
+							}, 1000);
+						}else{
+							document.querySelector("#status").innerText = "Done!";
+						}
+					}
+				});
+			}
+		</script>
+	</body>
+</html>
