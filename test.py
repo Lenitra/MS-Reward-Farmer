@@ -14,4 +14,4 @@ driver.set_window_size(414, 896)
 
 driver.get("https://lenitra.github.io/MS-Reward-Farmer/")
 while True:
-    print()
+    time.sleep(1)
