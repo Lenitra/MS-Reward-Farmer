@@ -80,6 +80,8 @@ def setdriver(type):
         userAgent = "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Mobile Safari/537.36"
         profile = webdriver.ChromeOptions()
         profile.add_argument(f'user-agent={userAgent}')
+        
+        profile.add_experimental_option("mobileEmulation", {"deviceName": "Samsung Galaxy S8+"})
 
         driver = webdriver.Chrome(options=profile)
         driver.set_window_size(414, 896)
@@ -95,11 +97,11 @@ with open('accounts.json') as json_file:
     password = data[0]['password']
     for p in data:
 
-        # display = Display(visible=0, size=(1080, 720))
-        # display.start()
-        # shearchs(setdriver(0))
+        display = Display(visible=0, size=(1080, 720))
+        display.start()
         shearchs(setdriver(1))
-        # display.stop()
+        shearchs(setdriver(0))
+        display.stop()
 
 
 
