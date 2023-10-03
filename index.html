@@ -43,18 +43,16 @@
     function createIframe() {
         let chars = chargen(10);
         let a = document.createElement("iframe");
-        document.querySelector("#iframes").appendChild(a);
-
+        
         let bingurl = new URL("https://www.bing.com/news/search?q=" + Math.random() + chars);
         a.src = bingurl.href;
         a.id = chars;
-
+        
+        document.querySelector("#iframes").appendChild(a);
+        
             a.onload = function () {
                 window.setTimeout(function () {
                     
-                    
-                    // refresh the iframe
-                    a.contentWindow.location.reload(true);
                     a.remove();
                     if (frameToShow != 0) {
                         frameToShow -= 1;
