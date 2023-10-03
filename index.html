@@ -8,9 +8,9 @@
 <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> -->
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-<!-- link js -->
-<script src="test.js"></script>
+<!-- show iframes and the hole page to mobile view like in devtools -->
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
     
@@ -25,12 +25,12 @@
 
 
 
-<style>
+<!-- <style>
     iframe {
         width: 414px;
         height: 896px;
     }
-</style>
+</style> -->
 
 <script>
 
@@ -55,15 +55,16 @@
         a.classList.add("iframe");
 
         document.querySelector("#iframes").appendChild(a);
-        
+        // reload the iframe
+        // a.contentWindow.location.reload(true);
             a.onload = function () {
                 window.setTimeout(function () {
                     
-                    a.remove();
+                    // a.remove();
                     if (frameToShow != 0) {
                         frameToShow -= 1;
                         console.log(frameToShow);
-                        createIframe();
+                        // createIframe();
                     }
                 }, 1000);
             }
@@ -73,9 +74,8 @@
 
 
 
-    const nbIframes = 1;
+    const nbIframes = 10;
     let frameToShow = -1;
-    // loop nbIframes times
     for (let i = 0; i < nbIframes; i++) {
         createIframe();
     }
