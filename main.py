@@ -70,11 +70,7 @@ def setdriver(type):
         driver.set_window_size(1080, 720)
 
     elif type == 1: # MODE MOBILE
-            # get the driver size
-        # mobile_emulation = {
-        #     "deviceMetrics": {"width": 375, "height": 812, "pixelRatio": 3.0},  # Dimensions de l'iPhone 12
-        #     "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile/15E148 Safari/604.1"
-        # }
+
 
         userAgent = "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Mobile Safari/537.36"
         profile = webdriver.ChromeOptions()
@@ -99,9 +95,11 @@ with open('accounts.json') as json_file:
 
 # shearchs(setdriver(0))
 
-# display = Display(visible=0, size=(375, 812))
+display = Display(visible=0, size=(1080, 720))
+display.start()
 shearchs(setdriver(1))
-# display.stop()
+shearchs(setdriver(0))
+display.stop()
 
 
 
