@@ -71,15 +71,16 @@ def setdriver(type):
 
     elif type == 1: # MODE MOBILE
             # get the driver size
-        mobile_emulation = {
-            "deviceMetrics": {"width": 375, "height": 812, "pixelRatio": 3.0},  # Dimensions de l'iPhone 12
-            "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile/15E148 Safari/604.1"
-        }
-        options = webdriver.ChromeOptions()
-        # options.add_argument("--headless")  
-        options.add_experimental_option("mobileEmulation", mobile_emulation)
+        # mobile_emulation = {
+        #     "deviceMetrics": {"width": 375, "height": 812, "pixelRatio": 3.0},  # Dimensions de l'iPhone 12
+        #     "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile/15E148 Safari/604.1"
+        # }
+
+        userAgent = "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Mobile Safari/537.36"
+        profile = webdriver.ChromeOptions()
+        profile.add_argument(f'user-agent={userAgent}')
         driver = webdriver.Chrome(options=options)
-        driver.set_window_size(375, 812)
+        driver.set_window_size(414, 896)
 
 
     return driver

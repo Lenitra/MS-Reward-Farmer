@@ -47,7 +47,7 @@
         let bingurl = new URL("https://www.bing.com/news/search?q=" + Math.random() + chars);
         a.src = bingurl.href;
         a.id = chars;
-        
+
         document.querySelector("#iframes").appendChild(a);
         
             a.onload = function () {
@@ -71,7 +71,7 @@
     let frameToShow = -1;
     // loop nbIframes times
     for (let i = 0; i < nbIframes; i++) {
-        tessss();
+        createIframe();
     }
 
 </script>
