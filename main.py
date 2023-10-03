@@ -1,8 +1,12 @@
+import os
 import json
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
+
+# display
+from pyvirtualdisplay import Display
 
 
 import time
@@ -31,6 +35,7 @@ def waitload(driver, oldpage):
 
 # se connecte à microsoft 
 def login(driver):
+
     driver.get("https://login.microsoftonline.com/")
     # attend que la page se charge
     findelement(driver, "name", "loginfmt").send_keys(username) # entre le nom d'utilisateur
@@ -52,9 +57,13 @@ def login(driver):
     
 def shearchs(driver):
 
-    login(driver)
 
-    driver.get("C:\\Users\\thoma\\Desktop\\MS-Reward-Farmer\\recherches.html")
+    login(driver)
+    # get the actual path to the python file
+    for i in range(0, 30):
+        rdmchar = os.urandom(8).hex()
+        driver.get("https://www.bing.com/search?q=" + rdmchar)
+        time.sleep(1)
     
     
     time.sleep(120)
@@ -70,16 +79,21 @@ def setdriver(type):
         driver.set_window_size(1080, 720)
 
     elif type == 1: # MODE MOBILE
-        mobile_emulation = { "deviceName": "Pixel 5" }
+            # get the driver size
+        mobile_emulation = {
+        "deviceMetrics": {
+            "width": 360,
+            "height": 640,
+            "pixelRatio": 3.0,
+        },
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; Pixel 4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Mobile Safari/537.36"
+        }
         options = webdriver.ChromeOptions()
+        options.add_argument("--headless")  
         options.add_experimental_option("mobileEmulation", mobile_emulation)
-        user_agent = "Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1"
-
-        # Utiliser CDP pour modifier l'agent utilisateur
-
         driver = webdriver.Chrome(options=options)
-        driver.execute_cdp_cmd("Network.setUserAgentOverride", {"userAgent": user_agent})
-        driver.set_window_size(200, 720)
+        driver.set_window_size(360, 640)
+
 
     return driver
 
@@ -94,11 +108,11 @@ with open('accounts.json') as json_file:
 
 
 
-shearchs(setdriver(0))
+# shearchs(setdriver(0))
+
+display = Display(visible=0, size=(720, 360))
 shearchs(setdriver(1))
+display.stop()
 
 
 
-
-
-input("Press Enter to continue...")

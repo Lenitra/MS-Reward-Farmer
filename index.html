@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>MS FARMER</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    
+    <h1>MSFARMER</h1>
+
+    <div id="iframes" class="iframes">
+
+    </div>
+
+
+
+
+
+
+
+
+<script>
+
+    function chargen(length) {
+        var result = '';
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for (var i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+    }
+
+    function createIframe() {
+        let chars = chargen(10);
+        let a = document.createElement("iframe");
+        let bingurl = new URL("https://www.bing.com/news/search?q=" + Math.random() + chars);
+        bingurl.searchParams.set("setmkt", "en-us");
+        bingurl.searchParams.set("setlang", "en");
+        a.src = bingurl.href;
+        a.id = chars;
+        document.querySelector("#iframes").appendChild(a);
+
+
+            a.onload = function () {
+                window.setTimeout(function () {
+                    a.remove();
+                    frameToShow -= 1;
+                    if (frameToShow > 0) {
+                        console.log(frameToShow);
+                        createIframe();
+                    }
+                }, 1000);
+            }
+    }
+
+
+
+
+
+
+    const nbIframes = 10;
+    let frameToShow = 100;
+    // loop nbIframes times
+    for (let i = 0; i < nbIframes; i++) {
+        createIframe();
+    }
+
+</script>
+
+
+</body>
+</html>
