@@ -25,12 +25,12 @@
 
 
 
-<style>
+<!-- <style>
     iframe {
         width: 414px;
         height: 896px;
     }
-</style>
+</style> -->
 
 <script>
 
@@ -55,15 +55,16 @@
         a.classList.add("iframe");
 
         document.querySelector("#iframes").appendChild(a);
-        
+        // reload the iframe
+        // a.contentWindow.location.reload(true);
             a.onload = function () {
                 window.setTimeout(function () {
                     
-                    a.remove();
+                    // a.remove();
                     if (frameToShow != 0) {
                         frameToShow -= 1;
                         console.log(frameToShow);
-                        createIframe();
+                        // createIframe();
                     }
                 }, 1000);
             }
@@ -73,9 +74,8 @@
 
 
 
-    const nbIframes = 1;
+    const nbIframes = 10;
     let frameToShow = -1;
-    // loop nbIframes times
     for (let i = 0; i < nbIframes; i++) {
         createIframe();
     }
