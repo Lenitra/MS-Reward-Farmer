@@ -56,18 +56,16 @@ def login(driver):
 
     
 def shearchs(driver):
-
-
     login(driver)
-    # get the actual path to the python file
-    for i in range(0, 30):
-        rdmchar = os.urandom(8).hex()
-        driver.get("https://www.bing.com/search?q=" + rdmchar)
-        time.sleep(1)
-    
-    
+    driver.get("https://lenitra.github.io/MS-Reward-Farmer/")
+    # Trouver les iframes sur la page et appliquer l'émulation mobile
+    iframes = driver.find_elements(By.TAG_NAME, "iframe")
+    for iframe in iframes:
+        driver.switch_to.frame(iframe)
+        driver.execute_script(
+            "document.documentElement.style.width='375px';document.documentElement.style.height='812px';"
+        )
     time.sleep(120)
-
     driver.quit()
 
 # Type = 0 : PC
@@ -81,18 +79,14 @@ def setdriver(type):
     elif type == 1: # MODE MOBILE
             # get the driver size
         mobile_emulation = {
-        "deviceMetrics": {
-            "width": 360,
-            "height": 640,
-            "pixelRatio": 3.0,
-        },
-        "userAgent": "Mozilla/5.0 (Linux; Android 10; Pixel 4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Mobile Safari/537.36"
+            "deviceMetrics": {"width": 375, "height": 812, "pixelRatio": 3.0},  # Dimensions de l'iPhone 12
+            "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile/15E148 Safari/604.1"
         }
         options = webdriver.ChromeOptions()
-        options.add_argument("--headless")  
+        # options.add_argument("--headless")  
         options.add_experimental_option("mobileEmulation", mobile_emulation)
         driver = webdriver.Chrome(options=options)
-        driver.set_window_size(360, 640)
+        driver.set_window_size(375, 812)
 
 
     return driver
@@ -110,9 +104,9 @@ with open('accounts.json') as json_file:
 
 # shearchs(setdriver(0))
 
-display = Display(visible=0, size=(720, 360))
+# display = Display(visible=0, size=(375, 812))
 shearchs(setdriver(1))
-display.stop()
+# display.stop()
 
 
 
