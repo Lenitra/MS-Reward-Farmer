@@ -58,13 +58,6 @@ def login(driver):
 def shearchs(driver):
     login(driver)
     driver.get("https://lenitra.github.io/MS-Reward-Farmer/")
-    # Trouver les iframes sur la page et appliquer l'émulation mobile
-    iframes = driver.find_elements(By.TAG_NAME, "iframe")
-    for iframe in iframes:
-        driver.switch_to.frame(iframe)
-        driver.execute_script(
-            "document.documentElement.style.width='375px';document.documentElement.style.height='812px';"
-        )
     time.sleep(120)
     driver.quit()
 
