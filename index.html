@@ -30,36 +30,38 @@
 <script>
 
     function chargen(length) {
-        var result = '';
-        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        var charactersLength = characters.length;
-        for (var i = 0; i < length; i++) {
+        let result = '';
+        let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let charactersLength = characters.length;
+        for (let i = 0; i < length; i++) {
             result += characters.charAt(Math.floor(Math.random() * charactersLength));
         }
         return result;
     }
 
+
     function createIframe() {
         let chars = chargen(10);
         let a = document.createElement("iframe");
-        let bingurl = new URL("https://www.bing.com/news/search?q=" + Math.random() + chars);
-        bingurl.searchParams.set("setmkt", "en-us");
-        bingurl.searchParams.set("setlang", "en");
-        a.src = bingurl.href;
-        a.id = chars;
-        a.contentWindow.navigator.userAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile/15E148 Safari/604.1";
-        // a.setAttribute("user-agent", "Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile/15E148 Safari/604.1");
         document.querySelector("#iframes").appendChild(a);
 
+        let bingurl = new URL("https://www.bing.com/news/search?q=" + Math.random() + chars);
+        a.src = bingurl.href;
+        a.id = chars;
+        
 
             a.onload = function () {
                 window.setTimeout(function () {
+                    
+                    a.contentWindow.navigator.userAgent = "Mozilla/5.0 (iPhone; CPU OS 13_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) FxiOS/23.0 Mobile/15E148 Safari/605.1.15";
+                    // refresh the iframe
+                    // a.contentWindow.location.reload(true);
                     // a.remove();
-                    if (frameToShow != 0) {
-                        frameToShow -= 1;
-                        console.log(frameToShow);
-                        // createIframe();
-                    }
+                    // if (frameToShow != 0) {
+                    //     frameToShow -= 1;
+                    //     console.log(frameToShow);
+                    //     // createIframe();
+                    // }
                 }, 1000);
             }
     }
