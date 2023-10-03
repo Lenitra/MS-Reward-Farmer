@@ -79,7 +79,8 @@ def setdriver(type):
         userAgent = "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Mobile Safari/537.36"
         profile = webdriver.ChromeOptions()
         profile.add_argument(f'user-agent={userAgent}')
-        driver = webdriver.Chrome(options=options)
+
+        driver = webdriver.Chrome(options=profile)
         driver.set_window_size(414, 896)
 
 

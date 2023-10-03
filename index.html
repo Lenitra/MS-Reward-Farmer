@@ -25,7 +25,12 @@
 
 
 
-
+<style>
+    iframe {
+        width: 414px;
+        height: 896px;
+    }
+</style>
 
 <script>
 
@@ -47,6 +52,7 @@
         let bingurl = new URL("https://www.bing.com/news/search?q=" + Math.random() + chars);
         a.src = bingurl.href;
         a.id = chars;
+        a.classList.add("iframe");
 
         document.querySelector("#iframes").appendChild(a);
         
