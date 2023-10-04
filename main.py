@@ -81,7 +81,7 @@ def setdriver(type):
         profile = webdriver.ChromeOptions()
         profile.add_argument(f'user-agent={userAgent}')
         
-        profile.add_experimental_option("mobileEmulation", {"deviceName": "Samsung Galaxy S8+"})
+        # profile.add_experimental_option("mobileEmulation", {"deviceName": "Samsung Galaxy S8+"})
 
         driver = webdriver.Chrome(options=profile)
         driver.set_window_size(414, 896)
