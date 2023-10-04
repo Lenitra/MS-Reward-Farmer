@@ -97,11 +97,11 @@ with open('accounts.json') as json_file:
     password = data[0]['password']
     for p in data:
 
-        display = Display(visible=0, size=(1080, 720))
-        display.start()
+        # display = Display(visible=0, size=(1080, 720))
+        # display.start()
         shearchs(setdriver(1))
-        shearchs(setdriver(0))
-        display.stop()
+        # shearchs(setdriver(0))
+        # display.stop()
 
 
 
