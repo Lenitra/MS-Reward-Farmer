@@ -4,12 +4,6 @@
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge'>
 <title>MS FARMER</title>
-<!-- <meta name='viewport' content='width=device-width, initial-scale=1'> -->
-<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> -->
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<!-- user agent to simulate mobile device -->
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 </head>
 <body>
     
@@ -52,6 +46,8 @@
         a.src = bingurl.href;
         a.id = chars;
         a.classList.add("iframe");
+        // force thne user agent to be mobile
+        a.setAttribute("sandbox", "allow-same-origin allow-scripts allow-popups allow-forms");
 
         document.querySelector("#iframes").appendChild(a);
         // reload the iframe

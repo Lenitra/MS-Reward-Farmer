@@ -77,7 +77,7 @@ def setdriver(type):
     elif type == 1: # MODE MOBILE
         print("Ouverture d'un navigateur en mode mobile")
 
-        userAgent = "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Mobile Safari/537.36"
+        userAgent = "Mozilla/5.0 (Linux; Android 12; RMX3085) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
         profile = webdriver.ChromeOptions()
         profile.add_argument(f'user-agent={userAgent}')
         
