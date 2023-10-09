@@ -93,15 +93,15 @@ def setdriver(type):
 
 with open('accounts.json') as json_file:
     data = json.load(json_file)
-    username = data[0]['username']
-    password = data[0]['password']
     for p in data:
+        username = p['username']
+        password = p['password']
 
-        display = Display(visible=0, size=(1080, 720))
-        display.start()
+        # display = Display(visible=0, size=(1080, 720))
+        # display.start()
         shearchs(setdriver(1))
         shearchs(setdriver(0))
-        display.stop()
+        # display.stop()
 
 
 

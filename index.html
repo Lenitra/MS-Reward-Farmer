@@ -42,7 +42,8 @@
         let chars = chargen(10);
         let a = document.createElement("iframe");
         
-        let bingurl = new URL("https://www.bing.com/news/search?q=" + Math.random() + chars);
+        let bingurl = new URL("https://www.bing.com/search?q=" + Math.random() + chars);
+        
         a.src = bingurl.href;
         a.id = chars;
         a.classList.add("iframe");
@@ -55,11 +56,11 @@
             a.onload = function () {
                 window.setTimeout(function () {
                     
-                    a.remove();
+                    // a.remove();
                     if (frameToShow != 0) {
                         frameToShow -= 1;
                         console.log(frameToShow);
-                        createIframe();
+                        // createIframe();
                     }
                 }, 1000);
             }
