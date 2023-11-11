@@ -39,10 +39,10 @@
 
 
     function createIframe() {
-        let chars = chargen(3);
+        let chars = chargen(10);
         let a = document.createElement("iframe");
         
-        let bingurl = new URL("https://www.bing.com/search?q=" + Math.random() + chars);
+        let bingurl = new URL("https://www.bing.com/search?q="+ chars);
         
         a.src = bingurl.href;
         a.id = chars;
@@ -62,7 +62,7 @@
                         console.log(frameToShow);
                         createIframe();
                     }
-                }, 1000);
+                }, 5000);
             }
     }
 
